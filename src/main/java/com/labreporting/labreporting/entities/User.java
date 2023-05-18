@@ -1,29 +1,43 @@
 package com.labreporting.labreporting.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.labreporting.labreporting.annotations.UniqueEmail;
+import com.labreporting.labreporting.annotations.UniqueIdentity;
+import com.labreporting.labreporting.annotations.UniqueUsername;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
-       
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long userID;
-	
+
+	@NotNull
+	@Size(min = 5, max = 30)
 	private String name;
-	
+
 	private String surname;
 	
+	@UniqueIdentity
 	private String identity;
 	
+	@NotNull
+	@UniqueUsername
 	private String username;
 	
+	@NotNull
+	@UniqueEmail
 	private String email;
-	
+
+	@NotNull
 	private String password;
-	
+
 	private String hospitalNO;
-	
+
 	private String role;
 
 	public long getUserID() {
@@ -97,8 +111,5 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	
-	
-	
+
 }
