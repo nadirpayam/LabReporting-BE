@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 @Constraint(validatedBy = { UniqueIdentityValidator.class })
 public @interface UniqueIdentity {
-	String message() default "Identity must be unique";
+	String message() default"{lab.constraint.identity.UniqueIdentity.message}";
 
 	Class<?>[] groups() default {};
 

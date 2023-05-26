@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 @Constraint(validatedBy = { UniqueEmailValidator.class })
 public @interface UniqueEmail {
-	String message() default "Email must be unique";
+	String message() default "{lab.constraints.email.UniqueEmail.message}";;
 
 	Class<?>[] groups() default {};
 

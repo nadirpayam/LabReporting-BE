@@ -2,16 +2,15 @@ package com.labreporting.labreporting.errors;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonView;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiError {
-
 	private int status;
-
 	private String message;
-
 	private String path;
-
 	private long timestamp = new Date().getTime();
-
 	private Map<String, String> validationErrors;
 
 	public ApiError(int status, String message, String path) {
