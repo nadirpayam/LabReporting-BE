@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,6 +24,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationEn
 import com.labreporting.labreporting.services.UserAuthService;
 
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled=true)
 public class SeucirtyConfiguration extends WebSecurityConfigurerAdapter {
 
 	private UserAuthService userAuthService;
@@ -39,7 +41,11 @@ public class SeucirtyConfiguration extends WebSecurityConfigurerAdapter {
 
 
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/auth").authenticated().and().authorizeRequests()
+		http.authorizeRequests()
+		.antMatchers(HttpMethod.POST, "/api/auth").authenticated()
+		.antMatchers(HttpMethod.PUT, "/api/users/{username}").authenticated()
+
+		.and().authorizeRequests()
 				.anyRequest().permitAll();
 
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
