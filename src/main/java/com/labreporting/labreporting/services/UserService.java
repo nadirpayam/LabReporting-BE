@@ -1,5 +1,10 @@
 package com.labreporting.labreporting.services;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -21,10 +26,14 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 
 	private UserRepository userRepository;
+	
+private FileService fileService;
+	
 
-	public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+	public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository, FileService fileService) {
 		this.passwordEncoder = passwordEncoder;
 		this.userRepository = userRepository;
+		this.fileService = fileService;
 	}
 
 	public void createOneUser(User user) {
@@ -33,7 +42,7 @@ public class UserService {
 	}
 
 	public Page<User> getAllUsers(Pageable page, User user) {
-		if(user!=null) {
+		if (user != null) {
 			return userRepository.findByUsernameNot(user.getUsername(), page);
 		}
 		return userRepository.findAll(page);
@@ -41,7 +50,7 @@ public class UserService {
 
 	public User getByUsername(String username) {
 		User inDB = userRepository.findByUsername(username);
-		if(inDB==null) {
+		if (inDB == null) {
 			throw new NotFoundException();
 		}
 		return inDB;
@@ -50,8 +59,19 @@ public class UserService {
 	public User updateUser(String username, UserUpdateVM updatedUser) {
 		User inDb = getByUsername(username);
 		inDb.setEmail(updatedUser.getEmail());
+		if (updatedUser.getImage() != null) {
+			String oldImageName = inDb.getImage();
+			try {
+				String storedFileName = fileService.writeBase64EncodedStringToFile(updatedUser.getImage());
+			     inDb.setImage(storedFileName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			fileService.deleteFile(oldImageName);
+		}
 		return userRepository.save(inDb);
-		
+
 	}
 
+	
 }
