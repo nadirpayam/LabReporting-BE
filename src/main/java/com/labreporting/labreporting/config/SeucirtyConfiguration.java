@@ -38,13 +38,13 @@ public class SeucirtyConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		http.httpBasic().authenticationEntryPoint(new AuthEntryPoint());
-
-
+             http.headers().frameOptions().disable();
+      
 
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/api/auth").authenticated()
 		.antMatchers(HttpMethod.PUT, "/api/users/{username}").authenticated()
-
+		.antMatchers(HttpMethod.POST, "/api/reports").authenticated()
 		.and().authorizeRequests()
 				.anyRequest().permitAll();
 

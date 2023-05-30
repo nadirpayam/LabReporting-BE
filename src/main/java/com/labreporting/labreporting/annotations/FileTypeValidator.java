@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.hibernate.Hibernate;
 import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext;
 
 import com.labreporting.labreporting.services.FileService;
