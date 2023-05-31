@@ -1,34 +1,26 @@
-#spring:
-#  datasource:
-#  url: jdbc:h2:./devdb
-#   username: sa
-#  jpa:
-#    hibernate:
-#    ddl-auto: update
-
-
-
 spring:
+  datasource:
+    url: jdbc:h2:file:./devdb;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
   jpa:
-   properties:
-    javax:
-     persistence:
-      validation:
-        mode: none
+    hibernate:
+      ddl-auto: update
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+
   profiles:
-     active:
-       - production
-        
+    active:
+      - production
+
   data:
     web:
       pageable:
-       default-page-size: 10
-       max-page-size: 100
-       
+        default-page-size: 10
+        max-page-size: 100
+
 lab-report:
-    upload-path: picture-storage
----
-spring:
-  profiles: production
-lab-report:
- upload-path: storage-production
+  upload-path: picture-storage

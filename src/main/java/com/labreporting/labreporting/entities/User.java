@@ -29,7 +29,7 @@ import com.labreporting.labreporting.annotations.UniqueIdentity;
 import com.labreporting.labreporting.annotations.UniqueUsername;
 
 @Entity
-@Table(name = "kullanicilar")
+@Table(name = "userz")
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;

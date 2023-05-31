@@ -44,7 +44,6 @@ public class SeucirtyConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/api/auth").authenticated()
 		.antMatchers(HttpMethod.PUT, "/api/users/{username}").authenticated()
-		.antMatchers(HttpMethod.POST, "/api/reports").authenticated()
 		.and().authorizeRequests()
 				.anyRequest().permitAll();
 

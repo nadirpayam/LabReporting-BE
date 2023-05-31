@@ -73,5 +73,13 @@ private FileService fileService;
 
 	}
 
+	public User getByUserId(Long userId) {
+		User inDB = userRepository.findByUserID(userId);
+		if (inDB == null) {
+			throw new NotFoundException();
+		}
+		return inDB;
+	}
+
 	
 }

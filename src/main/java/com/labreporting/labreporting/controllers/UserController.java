@@ -54,6 +54,12 @@ public class UserController {
 		 User user = userService.getByUsername(username);
 		 return new UserVM(user);
 	 }
+	 
+	 @GetMapping("/id/{userId}")
+	 UserVM getOneUserById(@PathVariable Long userId) {
+		 User user = userService.getByUserId(userId);
+		 return new UserVM(user);
+	 }
 	
 	 @PutMapping("/{username}")
 	 @PreAuthorize("#username == principal.username")
