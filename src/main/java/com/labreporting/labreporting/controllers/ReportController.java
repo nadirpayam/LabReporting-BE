@@ -1,6 +1,11 @@
 package com.labreporting.labreporting.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +14,7 @@ import com.labreporting.labreporting.repositories.ReportRepository;
 import com.labreporting.labreporting.responses.ReportResponse;
 import com.labreporting.labreporting.services.ReportService;
 import com.labreporting.labreporting.vm.ReportCreateVM;
+import com.labreporting.labreporting.vm.ReportUpdateRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,4 +56,18 @@ public class ReportController {
 		return reportService.createOneReport(create);
 	}
 	
+	@PatchMapping("/{reportId}")
+	public Report updateReportFields(@PathVariable Long reportId,@RequestBody Map<String, Object> fields) {
+		return reportService.updateReportByFields(reportId, fields);
+	}
+	
+	@PutMapping("/{reportId}")
+	public Report updateOneReport(@PathVariable Long reportId,@RequestBody ReportUpdateRequest request) {
+		return reportService.updateOneReportById(reportId,request);
+	}
+	
+	@DeleteMapping("/{reportId}")
+	public void deleteOneReport(@PathVariable Long reportId) {
+		reportService.deleteOneReportById(reportId);
+	}
 }

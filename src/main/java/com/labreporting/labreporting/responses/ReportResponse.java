@@ -15,6 +15,11 @@ public class ReportResponse {
 	private String diagnosis;
 	private String details;
 	private Date date;
+	private String hospitalNo;
+	private String emailH;
+	private String labAd;
+	private String labSoyad;
+	private String labMail;
 
 	public ReportResponse(Report entity) {
 		this.reportId = entity.getReportId();
@@ -25,6 +30,53 @@ public class ReportResponse {
 		this.identity = entity.getUser().getIdentity();
 		this.diagnosis = entity.getDiagnosis();
 		this.date = entity.getDate();
+		this.hospitalNo = entity.getUser1().getHospitalNO();
+		this.details = entity.getDetails();
+		this.emailH = entity.getUser().getEmail();
+		this.labAd = entity.getUser1().getName();
+		this.labMail = entity.getUser1().getEmail();
+		this.labSoyad = entity.getUser1().getSurname();
+
+	}
+
+	public String getLabAd() {
+		return labAd;
+	}
+
+	public void setLabAd(String labAd) {
+		this.labAd = labAd;
+	}
+
+	public String getLabSoyad() {
+		return labSoyad;
+	}
+
+	public void setLabSoyad(String labSoyad) {
+		this.labSoyad = labSoyad;
+	}
+
+	public String getLabMail() {
+		return labMail;
+	}
+
+	public void setLabMail(String labMail) {
+		this.labMail = labMail;
+	}
+
+	public String getEmailH() {
+		return emailH;
+	}
+
+	public void setEmailH(String emailH) {
+		this.emailH = emailH;
+	}
+
+	public String getHospitalNo() {
+		return hospitalNo;
+	}
+
+	public void setHospitalNo(String hospitalNo) {
+		this.hospitalNo = hospitalNo;
 	}
 
 	public Long getReportId() {
